@@ -1,0 +1,17 @@
+{
+  "name": "locationetworkplugincordova",
+  "version": "0.1.1",
+  "description": "Plugin de Cordova para hallar las coordenadas en donde estas",
+  "cordova": {
+    "id": "locationetworkplugincordova",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Edaviok",
+  "license": "ISC"
+}
