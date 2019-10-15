@@ -55,7 +55,7 @@ public class LocationNetwork extends CordovaPlugin {
 
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (cordova.hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION) && cordova.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (!cordova.hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION) && !cordova.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 grandPermissions();
             }
         }
