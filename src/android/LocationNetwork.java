@@ -54,7 +54,11 @@ public class LocationNetwork extends CordovaPlugin {
     }
 
     private void checkPermission() {
+        Log.e(TAG," Init getLocationNetwork");
+        Log.e(TAG," Coarse:"+cordova.hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION));
+        Log.e(TAG," Fine:"+cordova.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Log.e(TAG,Build.VERSION.SDK_INT+">="+ Build.VERSION_CODES.M);
             if (!cordova.hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION) && !cordova.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 grandPermissions();
             }
@@ -62,18 +66,17 @@ public class LocationNetwork extends CordovaPlugin {
     }
 
     private void grandPermissions(){
-
+        Log.e(TAG," Init grandPermissions");
         cordova.requestPermissions(this,REQUEST_CODE_ENABLE_PERMISSION,new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION});
     }
 
     @SuppressLint("MissingPermission")
     private Location getLocationNetwork(){
-
+        Log.e(TAG," Init getLocationNetwork");
         LocationManager manager = (LocationManager) cordova.getActivity().getSystemService(Context.LOCATION_SERVICE);
         manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         return manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
     }
-
 
 }
