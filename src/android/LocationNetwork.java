@@ -30,7 +30,12 @@ public class LocationNetwork extends CordovaPlugin {
         newcallbackContext=callbackContext;
         if (action.equals("coolMethod")) {
             //String message = args.getString(0);
-            this.coolMethod(callbackContext);
+            cordova.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    coolMethod(newcallbackContext);   
+                }
+            });
             return true;
         }
         return false;
