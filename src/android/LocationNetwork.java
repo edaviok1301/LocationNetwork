@@ -30,10 +30,17 @@ public class LocationNetwork extends CordovaPlugin {
         newcallbackContext=callbackContext;
         if (action.equals("coolMethod")) {
             //String message = args.getString(0);
-            cordova.getThreadPool().execute(new Runnable() {
+            this.cordova.getActivity().runOnUiThread(new Runnable(){
                 @Override
                 public void run() {
-                    coolMethod(newcallbackContext);   
+                    try{
+                        Log.d(TAG,"Into getThreadPool");
+                        coolMethod(newcallbackContext);
+                    }catch(Exception e){
+                        newcallbackContext.error(e.getMessage());
+                        Log.d(TAG,"Error:"+e.getMessage());
+                    }
+                    
                 }
             });
             return true;
@@ -48,12 +55,14 @@ public class LocationNetwork extends CordovaPlugin {
             Location location = getLocationNetwork();
             String response = "{'lat':'"+location.getLatitude()+"','lng':'"+location.getLongitude()+"'}";
             Log.e(TAG,"Response Location:"+response);
-            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,response);
-            callbackContext.sendPluginResult(pluginResult);
+            callbackContext.success(response);
+            //PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,response);
+            //callbackContext.sendPluginResult(pluginResult);
         }catch (Exception e){
             Log.e(TAG,"Fail Location:"+e.getMessage());
-            PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR,e.getMessage());
-            callbackContext.sendPluginResult(pluginResult);
+            callbackContext.error(e.getMessage());
+            //PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR,e.getMessage());
+            //callbackContext.sendPluginResult(pluginResult);
         }
 
     }
