@@ -93,4 +93,13 @@ public class LocationNetwork extends CordovaPlugin {
         return manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
     }
 
+    @Override
+    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException {
+        Log.e(TAG," Init onRequestPermissionResult");
+        if(permissions != null  && permissions.length > 0){
+            Log.e(TAG, permissions.toString()+" "+grantResults.toString());
+        }
+        super.onRequestPermissionResult(requestCode, permissions, grantResults);
+    }
+
 }
