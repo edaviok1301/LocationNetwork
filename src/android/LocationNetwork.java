@@ -55,14 +55,14 @@ public class LocationNetwork extends CordovaPlugin {
             Location location = getLocationNetwork();
             String response = "{'lat':'"+location.getLatitude()+"','lng':'"+location.getLongitude()+"'}";
             Log.e(TAG,"Response Location:"+response);
-            callbackContext.success(response);
-            //PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,response);
-            //callbackContext.sendPluginResult(pluginResult);
+            //callbackContext.success(response);
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,response);
+            callbackContext.sendPluginResult(pluginResult);
         }catch (Exception e){
             Log.e(TAG,"Fail Location:"+e.getMessage());
-            callbackContext.error(e.getMessage());
-            //PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR,e.getMessage());
-            //callbackContext.sendPluginResult(pluginResult);
+            //callbackContext.error(e.getMessage());
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR,e.getMessage());
+            callbackContext.sendPluginResult(pluginResult);
         }
 
     }
